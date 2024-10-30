@@ -16,6 +16,7 @@ export default function page() {
         `https://gnews.io/api/v4/search?q=example&lang=en&country=in&max=10&apikey=${process.env.API_KEY}`
       );
       const res = await response.json();
+      console.log(res);
       setData(res.articles);
     };
     fetchNews();
@@ -23,9 +24,10 @@ export default function page() {
   }, []);
   return (
     <div className="grid sm:grid-cols-3 ">
-      {loading ? <Loader /> : data.map((news) => (
+      {loading ? <Loader /> : data?.map((news) => (
         <NewsCard news={news} />
       ))}
+      
     </div>
   );
 }

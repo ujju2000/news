@@ -1,4 +1,5 @@
 
+import Footer from "@/components/Footer";
 import { Header } from "@/components/Header";
 import ThemedBody from "@/components/ThemedBody";
 import Topbar from "@/components/Topbar";
@@ -17,7 +18,10 @@ export default function RootLayout({ children }) {
           <ThemedBody>
             <Topbar />
             <Header />
-            {children}
+            <main className ='flex-grow '>
+              {children}
+            </main>
+            <Footer />
             </ThemedBody>
     </Provider>
       </html>
