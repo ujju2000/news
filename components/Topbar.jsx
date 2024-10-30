@@ -1,11 +1,11 @@
 "use client";
 import React, { useState , useEffect } from "react";
 import { Input } from "@/components/ui/input";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Search, Sun } from "lucide-react";
 import { useProvider } from "@/app/Provider";
 
 import { AlignJustify , X} from 'lucide-react';
-
+import { Button } from "@/components/ui/button"
 export default function Topbar() {
   const {theme , setTheme , setData ,data ,setLoading} = useProvider();
   const [keyword , setKeyword] = useState("");
@@ -24,11 +24,8 @@ export default function Topbar() {
     setToggle(false);
   }
 
-  useEffect(() => {
 
-    setTimeout(() => {  
-      fetchNews();
-    } , 2000)
+  const handleSearch = () => {
     const fetchNews = async () => {
       const response = await fetch(`https://gnews.io/api/v4/search?q=${keyword}&lang=en&country=in&max=10&apikey=${process.env.API_KEY}`)
       const res = await response.json();
@@ -37,12 +34,16 @@ export default function Topbar() {
 
       setData(res.articles);
     }
-  } ,[keyword])
+    fetchNews()
+  }
   return (
     <div className="flex border border-2 rounded-lg p-4 justify-between items-center ">
       <h1 className="text-xl md:text-2xl font-bold uppercase hidden sm:block">NEWSLETTER </h1>
-      <div className=" w-1/2 ">
-        <Input type="text" placeholder="Search... " onChange = {(e) => setKeyword(e.target.value)} />
+      <div className=" w-1/2 flex ">
+        <Input type="text" placeholder="Search... " onChange = {(e) => setKeyword(e.target.value)}  />
+        <Button variant = 'outline' onClick = {handleSearch}>
+          <Search />
+        </Button>
       </div>
       <button onClick={handleTheme} className="transition-colors duration-300 ">
         {theme ? <Moon /> : <Sun />}
@@ -52,8 +53,9 @@ export default function Topbar() {
         {
           !toggle ?  <AlignJustify onClick = {() => setToggle(true)}/> : 
           <X onClick = {() => setToggle(false)} />
+          
         }
-
+        
         {toggle && <ul className = {`text-xl bg-black flex flex-col p-3 absolute top-20  rounded-md  border border-l-2 border-b-2 ${toggle ? 'translate-x-[-100px] transition duration-300 ease-in-out ' : 'translate-x-90' }`}> 
           <li className = 'border-b-2 border-white p-2 ' onClick ={handleClick}>Explore </li>
           <li className = 'border-b-2 border-white p-2 ' onClick ={handleClick}>Business</li>

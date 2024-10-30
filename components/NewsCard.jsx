@@ -15,7 +15,6 @@ export default function NewsCard ({news}) {
     const handleClick = (e) => {
         router.push(news.url);
     }
-
     return (
         <Card className = 'm-5 cursor-pointer ' onClick = {(e) => handleClick(e)}>
 
