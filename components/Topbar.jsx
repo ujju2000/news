@@ -38,10 +38,11 @@ export default function Topbar() {
   }
   return (
     <div className="flex border border-2 rounded-lg p-4 justify-between items-center ">
-      <h1 className="text-xl md:text-2xl font-bold uppercase hidden sm:block">NEWSLETTER </h1>
-      <div className=" w-1/2 flex ">
+      <h1 className="text-xl md:text-2xl font-bold uppercase hidden sm:block">CURRENTCAST</h1>
+      <h1 className = 'sm:hidden font-bold text-5xl'>C</h1>
+      <div className=" w-1/2 flex items-center justify-around ">
         <Input type="text" placeholder="Search... " onChange = {(e) => setKeyword(e.target.value)}  />
-        <Button variant = 'outline' onClick = {handleSearch}>
+        <Button variant = 'outline' onClick = {handleSearch} >
           <Search />
         </Button>
       </div>
